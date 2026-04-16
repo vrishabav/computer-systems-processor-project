@@ -1,0 +1,7 @@
+CHIP Counter {
+    OUT out;
+
+    PARTS:
+    Not(in=currentOut, out=nextState);
+    Bit(in=nextState, load=true, out=currentOut, out=out);
+}

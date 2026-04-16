@@ -1,0 +1,54 @@
+CHIP ALU {
+    IN  
+        x[16], y[16],
+        zx, nx, zy, ny, f, no;
+    OUT 
+        out[16], zr, ng;
+
+    PARTS:
+    // Detecting Custom MUL Instructions
+    // Checking for prefix: zx=0, nx=1, zy=0, ny=1, f=1 (01011)
+    Not(in=zx, out=notZx);
+    Not(in=zy, out=notZy);
+    Not(in=no, out=notNo);
+    
+    And(a=notZx, b=nx, out=p1);
+    And(a=notZy, b=ny, out=p2);
+    And(a=p1, b=p2, out=p12);
+    And(a=p12, b=f, out=isMulBase);
+    
+    // Differentiate bw no=0 for lower 16 bits vs no=1 for upper 16 bits
+    And(a=isMulBase, b=notNo, out=isMulLow);
+    And(a=isMulBase, b=no, out=isMulHigh);
+    Or(a=isMulLow, b=isMulHigh, out=isMul);
+
+    // Standard ALU Datapath
+    Mux16(a=x, b=false, sel=zx, out=xZ);
+    Not16(in=xZ, out=notXz);
+    Mux16(a=xZ, b=notXz, sel=nx, out=xVal);
+
+    Mux16(a=y, b=false, sel=zy, out=yZ);
+    Not16(in=yZ, out=notYz);
+    Mux16(a=yZ, b=notYz, sel=ny, out=yVal);
+
+    Add16(a=xVal, b=yVal, out=sum);
+    And16(a=xVal, b=yVal, out=and);
+    Mux16(a=and, b=sum, sel=f, out=fOut);
+
+    Not16(in=fOut, out=notFout);
+    Mux16(a=fOut, b=notFout, sel=no, out=aluOut);
+
+    Multiplier(a=x, b=y, c[0..15]=prodLow, c[16..31]=prodHigh);
+    
+    // Route the particular half of the 32-bit product
+    Mux16(a=prodLow, b=prodHigh, sel=isMulHigh, out=mulOut);
+    
+    // Output and flags + splitting
+    Mux16(a=aluOut, b=mulOut, sel=isMul, out=finalOut);
+    Or16(a=finalOut, b=false, out=out, out[15]=ng, out[0..7]=low8, out[8..15]=high8);
+
+    Or8Way(in=low8, out=orLow);
+    Or8Way(in=high8, out=orHigh);
+    Or(a=orLow, b=orHigh, out=notZr);
+    Not(in=notZr, out=zr);
+}

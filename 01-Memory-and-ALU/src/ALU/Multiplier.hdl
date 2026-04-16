@@ -1,0 +1,599 @@
+CHIP Multiplier {
+    IN a[16], b[16];
+    OUT c[32];
+
+    PARTS:
+    // Partial Product Generation with 256 ANDs
+    // Naming convention: pxixj = a[i] AND b[j], bit-weight = i + j
+
+    // Row 0
+    And(a=a[0], b=b[0], out=px0x0); And(a=a[1], b=b[0], out=px1x0); And(a=a[2], b=b[0], out=px2x0); And(a=a[3], b=b[0], out=px3x0);
+    And(a=a[4], b=b[0], out=px4x0); And(a=a[5], b=b[0], out=px5x0); And(a=a[6], b=b[0], out=px6x0); And(a=a[7], b=b[0], out=px7x0);
+    And(a=a[8], b=b[0], out=px8x0); And(a=a[9], b=b[0], out=px9x0); And(a=a[10], b=b[0], out=px10x0); And(a=a[11], b=b[0], out=px11x0);
+    And(a=a[12], b=b[0], out=px12x0); And(a=a[13], b=b[0], out=px13x0); And(a=a[14], b=b[0], out=px14x0); And(a=a[15], b=b[0], out=px15x0);
+
+    // Row 1
+    And(a=a[0], b=b[1], out=px0x1); And(a=a[1], b=b[1], out=px1x1); And(a=a[2], b=b[1], out=px2x1); And(a=a[3], b=b[1], out=px3x1);
+    And(a=a[4], b=b[1], out=px4x1); And(a=a[5], b=b[1], out=px5x1); And(a=a[6], b=b[1], out=px6x1); And(a=a[7], b=b[1], out=px7x1);
+    And(a=a[8], b=b[1], out=px8x1); And(a=a[9], b=b[1], out=px9x1); And(a=a[10], b=b[1], out=px10x1); And(a=a[11], b=b[1], out=px11x1);
+    And(a=a[12], b=b[1], out=px12x1); And(a=a[13], b=b[1], out=px13x1); And(a=a[14], b=b[1], out=px14x1); And(a=a[15], b=b[1], out=px15x1);
+
+    // Row 2
+    And(a=a[0], b=b[2], out=px0x2); And(a=a[1], b=b[2], out=px1x2); And(a=a[2], b=b[2], out=px2x2); And(a=a[3], b=b[2], out=px3x2);
+    And(a=a[4], b=b[2], out=px4x2); And(a=a[5], b=b[2], out=px5x2); And(a=a[6], b=b[2], out=px6x2); And(a=a[7], b=b[2], out=px7x2);
+    And(a=a[8], b=b[2], out=px8x2); And(a=a[9], b=b[2], out=px9x2); And(a=a[10], b=b[2], out=px10x2); And(a=a[11], b=b[2], out=px11x2);
+    And(a=a[12], b=b[2], out=px12x2); And(a=a[13], b=b[2], out=px13x2); And(a=a[14], b=b[2], out=px14x2); And(a=a[15], b=b[2], out=px15x2);
+
+    // Row 3
+    And(a=a[0], b=b[3], out=px0x3); And(a=a[1], b=b[3], out=px1x3); And(a=a[2], b=b[3], out=px2x3); And(a=a[3], b=b[3], out=px3x3);
+    And(a=a[4], b=b[3], out=px4x3); And(a=a[5], b=b[3], out=px5x3); And(a=a[6], b=b[3], out=px6x3); And(a=a[7], b=b[3], out=px7x3);
+    And(a=a[8], b=b[3], out=px8x3); And(a=a[9], b=b[3], out=px9x3); And(a=a[10], b=b[3], out=px10x3); And(a=a[11], b=b[3], out=px11x3);
+    And(a=a[12], b=b[3], out=px12x3); And(a=a[13], b=b[3], out=px13x3); And(a=a[14], b=b[3], out=px14x3); And(a=a[15], b=b[3], out=px15x3);
+
+    // Row 4
+    And(a=a[0], b=b[4], out=px0x4); And(a=a[1], b=b[4], out=px1x4); And(a=a[2], b=b[4], out=px2x4); And(a=a[3], b=b[4], out=px3x4);
+    And(a=a[4], b=b[4], out=px4x4); And(a=a[5], b=b[4], out=px5x4); And(a=a[6], b=b[4], out=px6x4); And(a=a[7], b=b[4], out=px7x4);
+    And(a=a[8], b=b[4], out=px8x4); And(a=a[9], b=b[4], out=px9x4); And(a=a[10], b=b[4], out=px10x4); And(a=a[11], b=b[4], out=px11x4);
+    And(a=a[12], b=b[4], out=px12x4); And(a=a[13], b=b[4], out=px13x4); And(a=a[14], b=b[4], out=px14x4); And(a=a[15], b=b[4], out=px15x4);
+
+    // Row 5
+    And(a=a[0], b=b[5], out=px0x5); And(a=a[1], b=b[5], out=px1x5); And(a=a[2], b=b[5], out=px2x5); And(a=a[3], b=b[5], out=px3x5);
+    And(a=a[4], b=b[5], out=px4x5); And(a=a[5], b=b[5], out=px5x5); And(a=a[6], b=b[5], out=px6x5); And(a=a[7], b=b[5], out=px7x5);
+    And(a=a[8], b=b[5], out=px8x5); And(a=a[9], b=b[5], out=px9x5); And(a=a[10], b=b[5], out=px10x5); And(a=a[11], b=b[5], out=px11x5);
+    And(a=a[12], b=b[5], out=px12x5); And(a=a[13], b=b[5], out=px13x5); And(a=a[14], b=b[5], out=px14x5); And(a=a[15], b=b[5], out=px15x5);
+
+    // Row 6
+    And(a=a[0], b=b[6], out=px0x6); And(a=a[1], b=b[6], out=px1x6); And(a=a[2], b=b[6], out=px2x6); And(a=a[3], b=b[6], out=px3x6);
+    And(a=a[4], b=b[6], out=px4x6); And(a=a[5], b=b[6], out=px5x6); And(a=a[6], b=b[6], out=px6x6); And(a=a[7], b=b[6], out=px7x6);
+    And(a=a[8], b=b[6], out=px8x6); And(a=a[9], b=b[6], out=px9x6); And(a=a[10], b=b[6], out=px10x6); And(a=a[11], b=b[6], out=px11x6);
+    And(a=a[12], b=b[6], out=px12x6); And(a=a[13], b=b[6], out=px13x6); And(a=a[14], b=b[6], out=px14x6); And(a=a[15], b=b[6], out=px15x6);
+
+    // Row 7
+    And(a=a[0], b=b[7], out=px0x7); And(a=a[1], b=b[7], out=px1x7); And(a=a[2], b=b[7], out=px2x7); And(a=a[3], b=b[7], out=px3x7);
+    And(a=a[4], b=b[7], out=px4x7); And(a=a[5], b=b[7], out=px5x7); And(a=a[6], b=b[7], out=px6x7); And(a=a[7], b=b[7], out=px7x7);
+    And(a=a[8], b=b[7], out=px8x7); And(a=a[9], b=b[7], out=px9x7); And(a=a[10], b=b[7], out=px10x7); And(a=a[11], b=b[7], out=px11x7);
+    And(a=a[12], b=b[7], out=px12x7); And(a=a[13], b=b[7], out=px13x7); And(a=a[14], b=b[7], out=px14x7); And(a=a[15], b=b[7], out=px15x7);
+
+    // Row 8
+    And(a=a[0], b=b[8], out=px0x8); And(a=a[1], b=b[8], out=px1x8); And(a=a[2], b=b[8], out=px2x8); And(a=a[3], b=b[8], out=px3x8);
+    And(a=a[4], b=b[8], out=px4x8); And(a=a[5], b=b[8], out=px5x8); And(a=a[6], b=b[8], out=px6x8); And(a=a[7], b=b[8], out=px7x8);
+    And(a=a[8], b=b[8], out=px8x8); And(a=a[9], b=b[8], out=px9x8); And(a=a[10], b=b[8], out=px10x8); And(a=a[11], b=b[8], out=px11x8);
+    And(a=a[12], b=b[8], out=px12x8); And(a=a[13], b=b[8], out=px13x8); And(a=a[14], b=b[8], out=px14x8); And(a=a[15], b=b[8], out=px15x8);
+
+    // Row 9
+    And(a=a[0], b=b[9], out=px0x9); And(a=a[1], b=b[9], out=px1x9); And(a=a[2], b=b[9], out=px2x9); And(a=a[3], b=b[9], out=px3x9);
+    And(a=a[4], b=b[9], out=px4x9); And(a=a[5], b=b[9], out=px5x9); And(a=a[6], b=b[9], out=px6x9); And(a=a[7], b=b[9], out=px7x9);
+    And(a=a[8], b=b[9], out=px8x9); And(a=a[9], b=b[9], out=px9x9); And(a=a[10], b=b[9], out=px10x9); And(a=a[11], b=b[9], out=px11x9);
+    And(a=a[12], b=b[9], out=px12x9); And(a=a[13], b=b[9], out=px13x9); And(a=a[14], b=b[9], out=px14x9); And(a=a[15], b=b[9], out=px15x9);
+
+    // Row 10
+    And(a=a[0], b=b[10], out=px0x10); And(a=a[1], b=b[10], out=px1x10); And(a=a[2], b=b[10], out=px2x10); And(a=a[3], b=b[10], out=px3x10);
+    And(a=a[4], b=b[10], out=px4x10); And(a=a[5], b=b[10], out=px5x10); And(a=a[6], b=b[10], out=px6x10); And(a=a[7], b=b[10], out=px7x10);
+    And(a=a[8], b=b[10], out=px8x10); And(a=a[9], b=b[10], out=px9x10); And(a=a[10], b=b[10], out=px10x10); And(a=a[11], b=b[10], out=px11x10);
+    And(a=a[12], b=b[10], out=px12x10); And(a=a[13], b=b[10], out=px13x10); And(a=a[14], b=b[10], out=px14x10); And(a=a[15], b=b[10], out=px15x10);
+
+    // Row 11
+    And(a=a[0], b=b[11], out=px0x11); And(a=a[1], b=b[11], out=px1x11); And(a=a[2], b=b[11], out=px2x11); And(a=a[3], b=b[11], out=px3x11);
+    And(a=a[4], b=b[11], out=px4x11); And(a=a[5], b=b[11], out=px5x11); And(a=a[6], b=b[11], out=px6x11); And(a=a[7], b=b[11], out=px7x11);
+    And(a=a[8], b=b[11], out=px8x11); And(a=a[9], b=b[11], out=px9x11); And(a=a[10], b=b[11], out=px10x11); And(a=a[11], b=b[11], out=px11x11);
+    And(a=a[12], b=b[11], out=px12x11); And(a=a[13], b=b[11], out=px13x11); And(a=a[14], b=b[11], out=px14x11); And(a=a[15], b=b[11], out=px15x11);
+
+    // Row 12
+    And(a=a[0], b=b[12], out=px0x12); And(a=a[1], b=b[12], out=px1x12); And(a=a[2], b=b[12], out=px2x12); And(a=a[3], b=b[12], out=px3x12);
+    And(a=a[4], b=b[12], out=px4x12); And(a=a[5], b=b[12], out=px5x12); And(a=a[6], b=b[12], out=px6x12); And(a=a[7], b=b[12], out=px7x12);
+    And(a=a[8], b=b[12], out=px8x12); And(a=a[9], b=b[12], out=px9x12); And(a=a[10], b=b[12], out=px10x12); And(a=a[11], b=b[12], out=px11x12);
+    And(a=a[12], b=b[12], out=px12x12); And(a=a[13], b=b[12], out=px13x12); And(a=a[14], b=b[12], out=px14x12); And(a=a[15], b=b[12], out=px15x12);
+
+    // Row 13
+    And(a=a[0], b=b[13], out=px0x13); And(a=a[1], b=b[13], out=px1x13); And(a=a[2], b=b[13], out=px2x13); And(a=a[3], b=b[13], out=px3x13);
+    And(a=a[4], b=b[13], out=px4x13); And(a=a[5], b=b[13], out=px5x13); And(a=a[6], b=b[13], out=px6x13); And(a=a[7], b=b[13], out=px7x13);
+    And(a=a[8], b=b[13], out=px8x13); And(a=a[9], b=b[13], out=px9x13); And(a=a[10], b=b[13], out=px10x13); And(a=a[11], b=b[13], out=px11x13);
+    And(a=a[12], b=b[13], out=px12x13); And(a=a[13], b=b[13], out=px13x13); And(a=a[14], b=b[13], out=px14x13); And(a=a[15], b=b[13], out=px15x13);
+
+    // Row 14
+    And(a=a[0], b=b[14], out=px0x14); And(a=a[1], b=b[14], out=px1x14); And(a=a[2], b=b[14], out=px2x14); And(a=a[3], b=b[14], out=px3x14);
+    And(a=a[4], b=b[14], out=px4x14); And(a=a[5], b=b[14], out=px5x14); And(a=a[6], b=b[14], out=px6x14); And(a=a[7], b=b[14], out=px7x14);
+    And(a=a[8], b=b[14], out=px8x14); And(a=a[9], b=b[14], out=px9x14); And(a=a[10], b=b[14], out=px10x14); And(a=a[11], b=b[14], out=px11x14);
+    And(a=a[12], b=b[14], out=px12x14); And(a=a[13], b=b[14], out=px13x14); And(a=a[14], b=b[14], out=px14x14); And(a=a[15], b=b[14], out=px15x14);
+
+    // Row 15
+    And(a=a[0], b=b[15], out=px0x15); And(a=a[1], b=b[15], out=px1x15); And(a=a[2], b=b[15], out=px2x15); And(a=a[3], b=b[15], out=px3x15);
+    And(a=a[4], b=b[15], out=px4x15); And(a=a[5], b=b[15], out=px5x15); And(a=a[6], b=b[15], out=px6x15); And(a=a[7], b=b[15], out=px7x15);
+    And(a=a[8], b=b[15], out=px8x15); And(a=a[9], b=b[15], out=px9x15); And(a=a[10], b=b[15], out=px10x15); And(a=a[11], b=b[15], out=px11x15);
+    And(a=a[12], b=b[15], out=px12x15); And(a=a[13], b=b[15], out=px13x15); And(a=a[14], b=b[15], out=px14x15); And(a=a[15], b=b[15], out=px15x15);
+
+
+    
+    // Stage 1: 16 rows -> 11 rows
+    
+    // Grp A (Rows 0,1,2 - weights 0 to 17)
+    Or(a=px0x0, b=false, out=sAx0);
+    HalfAdder(a=px1x0, b=px0x1, sum=sAx1, carry=cAx2);
+    FullAdder(a=px2x0, b=px1x1, c=px0x2, sum=sAx2, carry=cAx3);
+    FullAdder(a=px3x0, b=px2x1, c=px1x2, sum=sAx3, carry=cAx4);
+    FullAdder(a=px4x0, b=px3x1, c=px2x2, sum=sAx4, carry=cAx5);
+    FullAdder(a=px5x0, b=px4x1, c=px3x2, sum=sAx5, carry=cAx6);
+    FullAdder(a=px6x0, b=px5x1, c=px4x2, sum=sAx6, carry=cAx7);
+    FullAdder(a=px7x0, b=px6x1, c=px5x2, sum=sAx7, carry=cAx8);
+    FullAdder(a=px8x0, b=px7x1, c=px6x2, sum=sAx8, carry=cAx9);
+    FullAdder(a=px9x0, b=px8x1, c=px7x2, sum=sAx9, carry=cAx10);
+    FullAdder(a=px10x0, b=px9x1, c=px8x2, sum=sAx10, carry=cAx11);
+    FullAdder(a=px11x0, b=px10x1, c=px9x2, sum=sAx11, carry=cAx12);
+    FullAdder(a=px12x0, b=px11x1, c=px10x2, sum=sAx12, carry=cAx13);
+    FullAdder(a=px13x0, b=px12x1, c=px11x2, sum=sAx13, carry=cAx14);
+    FullAdder(a=px14x0, b=px13x1, c=px12x2, sum=sAx14, carry=cAx15);
+    FullAdder(a=px15x0, b=px14x1, c=px13x2, sum=sAx15, carry=cAx16);
+    HalfAdder(a=px15x1, b=px14x2, sum=sAx16, carry=cAx17);
+    Or(a=px15x2, b=false, out=sAx17);
+
+    // Grp B (Rows 3,4,5 - weights 3 to 20)
+    Or(a=px0x3, b=false, out=sBx3);
+    HalfAdder(a=px1x3, b=px0x4, sum=sBx4, carry=cBx5);
+    FullAdder(a=px2x3, b=px1x4, c=px0x5, sum=sBx5, carry=cBx6);
+    FullAdder(a=px3x3, b=px2x4, c=px1x5, sum=sBx6, carry=cBx7);
+    FullAdder(a=px4x3, b=px3x4, c=px2x5, sum=sBx7, carry=cBx8);
+    FullAdder(a=px5x3, b=px4x4, c=px3x5, sum=sBx8, carry=cBx9);
+    FullAdder(a=px6x3, b=px5x4, c=px4x5, sum=sBx9, carry=cBx10);
+    FullAdder(a=px7x3, b=px6x4, c=px5x5, sum=sBx10, carry=cBx11);
+    FullAdder(a=px8x3, b=px7x4, c=px6x5, sum=sBx11, carry=cBx12);
+    FullAdder(a=px9x3, b=px8x4, c=px7x5, sum=sBx12, carry=cBx13);
+    FullAdder(a=px10x3, b=px9x4, c=px8x5, sum=sBx13, carry=cBx14);
+    FullAdder(a=px11x3, b=px10x4, c=px9x5, sum=sBx14, carry=cBx15);
+    FullAdder(a=px12x3, b=px11x4, c=px10x5, sum=sBx15, carry=cBx16);
+    FullAdder(a=px13x3, b=px12x4, c=px11x5, sum=sBx16, carry=cBx17);
+    FullAdder(a=px14x3, b=px13x4, c=px12x5, sum=sBx17, carry=cBx18);
+    FullAdder(a=px15x3, b=px14x4, c=px13x5, sum=sBx18, carry=cBx19);
+    HalfAdder(a=px15x4, b=px14x5, sum=sBx19, carry=cBx20);
+    Or(a=px15x5, b=false, out=sBx20);
+
+    // Grp C (Rows 6,7,8 - weights 6 to 23)
+    Or(a=px0x6, b=false, out=sCx6);
+    HalfAdder(a=px1x6, b=px0x7, sum=sCx7, carry=cCx8);
+    FullAdder(a=px2x6, b=px1x7, c=px0x8, sum=sCx8, carry=cCx9);
+    FullAdder(a=px3x6, b=px2x7, c=px1x8, sum=sCx9, carry=cCx10);
+    FullAdder(a=px4x6, b=px3x7, c=px2x8, sum=sCx10, carry=cCx11);
+    FullAdder(a=px5x6, b=px4x7, c=px3x8, sum=sCx11, carry=cCx12);
+    FullAdder(a=px6x6, b=px5x7, c=px4x8, sum=sCx12, carry=cCx13);
+    FullAdder(a=px7x6, b=px6x7, c=px5x8, sum=sCx13, carry=cCx14);
+    FullAdder(a=px8x6, b=px7x7, c=px6x8, sum=sCx14, carry=cCx15);
+    FullAdder(a=px9x6, b=px8x7, c=px7x8, sum=sCx15, carry=cCx16);
+    FullAdder(a=px10x6, b=px9x7, c=px8x8, sum=sCx16, carry=cCx17);
+    FullAdder(a=px11x6, b=px10x7, c=px9x8, sum=sCx17, carry=cCx18);
+    FullAdder(a=px12x6, b=px11x7, c=px10x8, sum=sCx18, carry=cCx19);
+    FullAdder(a=px13x6, b=px12x7, c=px11x8, sum=sCx19, carry=cCx20);
+    FullAdder(a=px14x6, b=px13x7, c=px12x8, sum=sCx20, carry=cCx21);
+    FullAdder(a=px15x6, b=px14x7, c=px13x8, sum=sCx21, carry=cCx22);
+    HalfAdder(a=px15x7, b=px14x8, sum=sCx22, carry=cCx23);
+    Or(a=px15x8, b=false, out=sCx23);
+
+    // Grp D (Rows 9,10,11 - weights 9 to 26)
+    Or(a=px0x9, b=false, out=sDx9);
+    HalfAdder(a=px1x9, b=px0x10, sum=sDx10, carry=cDx11);
+    FullAdder(a=px2x9, b=px1x10, c=px0x11, sum=sDx11, carry=cDx12);
+    FullAdder(a=px3x9, b=px2x10, c=px1x11, sum=sDx12, carry=cDx13);
+    FullAdder(a=px4x9, b=px3x10, c=px2x11, sum=sDx13, carry=cDx14);
+    FullAdder(a=px5x9, b=px4x10, c=px3x11, sum=sDx14, carry=cDx15);
+    FullAdder(a=px6x9, b=px5x10, c=px4x11, sum=sDx15, carry=cDx16);
+    FullAdder(a=px7x9, b=px6x10, c=px5x11, sum=sDx16, carry=cDx17);
+    FullAdder(a=px8x9, b=px7x10, c=px6x11, sum=sDx17, carry=cDx18);
+    FullAdder(a=px9x9, b=px8x10, c=px7x11, sum=sDx18, carry=cDx19);
+    FullAdder(a=px10x9, b=px9x10, c=px8x11, sum=sDx19, carry=cDx20);
+    FullAdder(a=px11x9, b=px10x10, c=px9x11, sum=sDx20, carry=cDx21);
+    FullAdder(a=px12x9, b=px11x10, c=px10x11, sum=sDx21, carry=cDx22);
+    FullAdder(a=px13x9, b=px12x10, c=px11x11, sum=sDx22, carry=cDx23);
+    FullAdder(a=px14x9, b=px13x10, c=px12x11, sum=sDx23, carry=cDx24);
+    FullAdder(a=px15x9, b=px14x10, c=px13x11, sum=sDx24, carry=cDx25);
+    HalfAdder(a=px15x10, b=px14x11, sum=sDx25, carry=cDx26);
+    Or(a=px15x11, b=false, out=sDx26);
+
+    // Grp E (Rows 12,13,14 - weights 12 to 29)
+    Or(a=px0x12, b=false, out=sEx12);
+    HalfAdder(a=px1x12, b=px0x13, sum=sEx13, carry=cEx14);
+    FullAdder(a=px2x12, b=px1x13, c=px0x14, sum=sEx14, carry=cEx15);
+    FullAdder(a=px3x12, b=px2x13, c=px1x14, sum=sEx15, carry=cEx16);
+    FullAdder(a=px4x12, b=px3x13, c=px2x14, sum=sEx16, carry=cEx17);
+    FullAdder(a=px5x12, b=px4x13, c=px3x14, sum=sEx17, carry=cEx18);
+    FullAdder(a=px6x12, b=px5x13, c=px4x14, sum=sEx18, carry=cEx19);
+    FullAdder(a=px7x12, b=px6x13, c=px5x14, sum=sEx19, carry=cEx20);
+    FullAdder(a=px8x12, b=px7x13, c=px6x14, sum=sEx20, carry=cEx21);
+    FullAdder(a=px9x12, b=px8x13, c=px7x14, sum=sEx21, carry=cEx22);
+    FullAdder(a=px10x12, b=px9x13, c=px8x14, sum=sEx22, carry=cEx23);
+    FullAdder(a=px11x12, b=px10x13, c=px9x14, sum=sEx23, carry=cEx24);
+    FullAdder(a=px12x12, b=px11x13, c=px10x14, sum=sEx24, carry=cEx25);
+    FullAdder(a=px13x12, b=px12x13, c=px11x14, sum=sEx25, carry=cEx26);
+    FullAdder(a=px14x12, b=px13x13, c=px12x14, sum=sEx26, carry=cEx27);
+    FullAdder(a=px15x12, b=px14x13, c=px13x14, sum=sEx27, carry=cEx28);
+    HalfAdder(a=px15x13, b=px14x14, sum=sEx28, carry=cEx29);
+    Or(a=px15x14, b=false, out=sEx29);
+
+    // Row 15 Forwarding
+    Or(a=px0x15, b=false, out=sPx15); Or(a=px1x15, b=false, out=sPx16); Or(a=px2x15, b=false, out=sPx17); Or(a=px3x15, b=false, out=sPx18);
+    Or(a=px4x15, b=false, out=sPx19); Or(a=px5x15, b=false, out=sPx20); Or(a=px6x15, b=false, out=sPx21); Or(a=px7x15, b=false, out=sPx22);
+    Or(a=px8x15, b=false, out=sPx23); Or(a=px9x15, b=false, out=sPx24); Or(a=px10x15, b=false, out=sPx25); Or(a=px11x15, b=false, out=sPx26);
+    Or(a=px12x15, b=false, out=sPx27); Or(a=px13x15, b=false, out=sPx28); Or(a=px14x15, b=false, out=sPx29); Or(a=px15x15, b=false, out=sPx30);
+
+
+    
+    // Stage 2: 11 rows -> 8 rows
+    
+    // Grp F (sA:0..17, cA:2..17, sB:3..20)
+    Or(a=sAx0, b=false, out=sFx0);
+    Or(a=sAx1, b=false, out=sFx1);
+    HalfAdder(a=sAx2, b=cAx2, sum=sFx2, carry=cFx3);
+    FullAdder(a=sAx3, b=cAx3, c=sBx3, sum=sFx3, carry=cFx4);
+    FullAdder(a=sAx4, b=cAx4, c=sBx4, sum=sFx4, carry=cFx5);
+    FullAdder(a=sAx5, b=cAx5, c=sBx5, sum=sFx5, carry=cFx6);
+    FullAdder(a=sAx6, b=cAx6, c=sBx6, sum=sFx6, carry=cFx7);
+    FullAdder(a=sAx7, b=cAx7, c=sBx7, sum=sFx7, carry=cFx8);
+    FullAdder(a=sAx8, b=cAx8, c=sBx8, sum=sFx8, carry=cFx9);
+    FullAdder(a=sAx9, b=cAx9, c=sBx9, sum=sFx9, carry=cFx10);
+    FullAdder(a=sAx10, b=cAx10, c=sBx10, sum=sFx10, carry=cFx11);
+    FullAdder(a=sAx11, b=cAx11, c=sBx11, sum=sFx11, carry=cFx12);
+    FullAdder(a=sAx12, b=cAx12, c=sBx12, sum=sFx12, carry=cFx13);
+    FullAdder(a=sAx13, b=cAx13, c=sBx13, sum=sFx13, carry=cFx14);
+    FullAdder(a=sAx14, b=cAx14, c=sBx14, sum=sFx14, carry=cFx15);
+    FullAdder(a=sAx15, b=cAx15, c=sBx15, sum=sFx15, carry=cFx16);
+    FullAdder(a=sAx16, b=cAx16, c=sBx16, sum=sFx16, carry=cFx17);
+    FullAdder(a=sAx17, b=cAx17, c=sBx17, sum=sFx17, carry=cFx18);
+    Or(a=sBx18, b=false, out=sFx18);
+    Or(a=sBx19, b=false, out=sFx19);
+    Or(a=sBx20, b=false, out=sFx20);
+
+    // Grp G (cB:5..20, sC:6..23, cC:8..23)
+    Or(a=cBx5, b=false, out=sGx5);
+    HalfAdder(a=cBx6, b=sCx6, sum=sGx6, carry=cGx7);
+    HalfAdder(a=cBx7, b=sCx7, sum=sGx7, carry=cGx8);
+    FullAdder(a=cBx8, b=sCx8, c=cCx8, sum=sGx8, carry=cGx9);
+    FullAdder(a=cBx9, b=sCx9, c=cCx9, sum=sGx9, carry=cGx10);
+    FullAdder(a=cBx10, b=sCx10, c=cCx10, sum=sGx10, carry=cGx11);
+    FullAdder(a=cBx11, b=sCx11, c=cCx11, sum=sGx11, carry=cGx12);
+    FullAdder(a=cBx12, b=sCx12, c=cCx12, sum=sGx12, carry=cGx13);
+    FullAdder(a=cBx13, b=sCx13, c=cCx13, sum=sGx13, carry=cGx14);
+    FullAdder(a=cBx14, b=sCx14, c=cCx14, sum=sGx14, carry=cGx15);
+    FullAdder(a=cBx15, b=sCx15, c=cCx15, sum=sGx15, carry=cGx16);
+    FullAdder(a=cBx16, b=sCx16, c=cCx16, sum=sGx16, carry=cGx17);
+    FullAdder(a=cBx17, b=sCx17, c=cCx17, sum=sGx17, carry=cGx18);
+    FullAdder(a=cBx18, b=sCx18, c=cCx18, sum=sGx18, carry=cGx19);
+    FullAdder(a=cBx19, b=sCx19, c=cCx19, sum=sGx19, carry=cGx20);
+    FullAdder(a=cBx20, b=sCx20, c=cCx20, sum=sGx20, carry=cGx21);
+    HalfAdder(a=sCx21, b=cCx21, sum=sGx21, carry=cGx22);
+    HalfAdder(a=sCx22, b=cCx22, sum=sGx22, carry=cGx23);
+    HalfAdder(a=sCx23, b=cCx23, sum=sGx23, carry=cGx24);
+
+    // Grp H (sD:9..26, cD:11..26, sE:12..29)
+    Or(a=sDx9, b=false, out=sHx9);
+    Or(a=sDx10, b=false, out=sHx10);
+    HalfAdder(a=sDx11, b=cDx11, sum=sHx11, carry=cHx12);
+    FullAdder(a=sDx12, b=cDx12, c=sEx12, sum=sHx12, carry=cHx13);
+    FullAdder(a=sDx13, b=cDx13, c=sEx13, sum=sHx13, carry=cHx14);
+    FullAdder(a=sDx14, b=cDx14, c=sEx14, sum=sHx14, carry=cHx15);
+    FullAdder(a=sDx15, b=cDx15, c=sEx15, sum=sHx15, carry=cHx16);
+    FullAdder(a=sDx16, b=cDx16, c=sEx16, sum=sHx16, carry=cHx17);
+    FullAdder(a=sDx17, b=cDx17, c=sEx17, sum=sHx17, carry=cHx18);
+    FullAdder(a=sDx18, b=cDx18, c=sEx18, sum=sHx18, carry=cHx19);
+    FullAdder(a=sDx19, b=cDx19, c=sEx19, sum=sHx19, carry=cHx20);
+    FullAdder(a=sDx20, b=cDx20, c=sEx20, sum=sHx20, carry=cHx21);
+    FullAdder(a=sDx21, b=cDx21, c=sEx21, sum=sHx21, carry=cHx22);
+    FullAdder(a=sDx22, b=cDx22, c=sEx22, sum=sHx22, carry=cHx23);
+    FullAdder(a=sDx23, b=cDx23, c=sEx23, sum=sHx23, carry=cHx24);
+    FullAdder(a=sDx24, b=cDx24, c=sEx24, sum=sHx24, carry=cHx25);
+    FullAdder(a=sDx25, b=cDx25, c=sEx25, sum=sHx25, carry=cHx26);
+    FullAdder(a=sDx26, b=cDx26, c=sEx26, sum=sHx26, carry=cHx27);
+    Or(a=sEx27, b=false, out=sHx27);
+    Or(a=sEx28, b=false, out=sHx28);
+    Or(a=sEx29, b=false, out=sHx29);
+
+
+    
+    // Stage 3: 8 rows -> 6 rows
+    
+    // Grp J (sF:0..20, cF:3..18, sG:5..23)
+    Or(a=sFx0, b=false, out=sJx0);
+    Or(a=sFx1, b=false, out=sJx1);
+    Or(a=sFx2, b=false, out=sJx2);
+    HalfAdder(a=sFx3, b=cFx3, sum=sJx3, carry=cJx4);
+    HalfAdder(a=sFx4, b=cFx4, sum=sJx4, carry=cJx5);
+    FullAdder(a=sFx5, b=cFx5, c=sGx5, sum=sJx5, carry=cJx6);
+    FullAdder(a=sFx6, b=cFx6, c=sGx6, sum=sJx6, carry=cJx7);
+    FullAdder(a=sFx7, b=cFx7, c=sGx7, sum=sJx7, carry=cJx8);
+    FullAdder(a=sFx8, b=cFx8, c=sGx8, sum=sJx8, carry=cJx9);
+    FullAdder(a=sFx9, b=cFx9, c=sGx9, sum=sJx9, carry=cJx10);
+    FullAdder(a=sFx10, b=cFx10, c=sGx10, sum=sJx10, carry=cJx11);
+    FullAdder(a=sFx11, b=cFx11, c=sGx11, sum=sJx11, carry=cJx12);
+    FullAdder(a=sFx12, b=cFx12, c=sGx12, sum=sJx12, carry=cJx13);
+    FullAdder(a=sFx13, b=cFx13, c=sGx13, sum=sJx13, carry=cJx14);
+    FullAdder(a=sFx14, b=cFx14, c=sGx14, sum=sJx14, carry=cJx15);
+    FullAdder(a=sFx15, b=cFx15, c=sGx15, sum=sJx15, carry=cJx16);
+    FullAdder(a=sFx16, b=cFx16, c=sGx16, sum=sJx16, carry=cJx17);
+    FullAdder(a=sFx17, b=cFx17, c=sGx17, sum=sJx17, carry=cJx18);
+    FullAdder(a=sFx18, b=cFx18, c=sGx18, sum=sJx18, carry=cJx19);
+    HalfAdder(a=sFx19, b=sGx19, sum=sJx19, carry=cJx20);
+    HalfAdder(a=sFx20, b=sGx20, sum=sJx20, carry=cJx21);
+    Or(a=sGx21, b=false, out=sJx21);
+    Or(a=sGx22, b=false, out=sJx22);
+    Or(a=sGx23, b=false, out=sJx23);
+
+    // Grp K (cG:7..24, sH:9..29, cH:12..27)
+    Or(a=cGx7, b=false, out=sKx7);
+    Or(a=cGx8, b=false, out=sKx8);
+    HalfAdder(a=cGx9, b=sHx9, sum=sKx9, carry=cKx10);
+    HalfAdder(a=cGx10, b=sHx10, sum=sKx10, carry=cKx11);
+    HalfAdder(a=cGx11, b=sHx11, sum=sKx11, carry=cKx12);
+    FullAdder(a=cGx12, b=sHx12, c=cHx12, sum=sKx12, carry=cKx13);
+    FullAdder(a=cGx13, b=sHx13, c=cHx13, sum=sKx13, carry=cKx14);
+    FullAdder(a=cGx14, b=sHx14, c=cHx14, sum=sKx14, carry=cKx15);
+    FullAdder(a=cGx15, b=sHx15, c=cHx15, sum=sKx15, carry=cKx16);
+    FullAdder(a=cGx16, b=sHx16, c=cHx16, sum=sKx16, carry=cKx17);
+    FullAdder(a=cGx17, b=sHx17, c=cHx17, sum=sKx17, carry=cKx18);
+    FullAdder(a=cGx18, b=sHx18, c=cHx18, sum=sKx18, carry=cKx19);
+    FullAdder(a=cGx19, b=sHx19, c=cHx19, sum=sKx19, carry=cKx20);
+    FullAdder(a=cGx20, b=sHx20, c=cHx20, sum=sKx20, carry=cKx21);
+    FullAdder(a=cGx21, b=sHx21, c=cHx21, sum=sKx21, carry=cKx22);
+    FullAdder(a=cGx22, b=sHx22, c=cHx22, sum=sKx22, carry=cKx23);
+    FullAdder(a=cGx23, b=sHx23, c=cHx23, sum=sKx23, carry=cKx24);
+    FullAdder(a=cGx24, b=sHx24, c=cHx24, sum=sKx24, carry=cKx25);
+    HalfAdder(a=sHx25, b=cHx25, sum=sKx25, carry=cKx26);
+    HalfAdder(a=sHx26, b=cHx26, sum=sKx26, carry=cKx27);
+    HalfAdder(a=sHx27, b=cHx27, sum=sKx27, carry=cKx28);
+    Or(a=sHx28, b=false, out=sKx28);
+    Or(a=sHx29, b=false, out=sKx29);
+
+
+    
+    // Stage 4: 6 rows -> 4 rows
+    
+    // Grp L (sJ:0..23, cJ:4..21, sK:7..29)
+    Or(a=sJx0, b=false, out=sLx0); Or(a=sJx1, b=false, out=sLx1);
+    Or(a=sJx2, b=false, out=sLx2); Or(a=sJx3, b=false, out=sLx3);
+    HalfAdder(a=sJx4, b=cJx4, sum=sLx4, carry=cLx5);
+    HalfAdder(a=sJx5, b=cJx5, sum=sLx5, carry=cLx6);
+    HalfAdder(a=sJx6, b=cJx6, sum=sLx6, carry=cLx7);
+    FullAdder(a=sJx7, b=cJx7, c=sKx7, sum=sLx7, carry=cLx8);
+    FullAdder(a=sJx8, b=cJx8, c=sKx8, sum=sLx8, carry=cLx9);
+    FullAdder(a=sJx9, b=cJx9, c=sKx9, sum=sLx9, carry=cLx10);
+    FullAdder(a=sJx10, b=cJx10, c=sKx10, sum=sLx10, carry=cLx11);
+    FullAdder(a=sJx11, b=cJx11, c=sKx11, sum=sLx11, carry=cLx12);
+    FullAdder(a=sJx12, b=cJx12, c=sKx12, sum=sLx12, carry=cLx13);
+    FullAdder(a=sJx13, b=cJx13, c=sKx13, sum=sLx13, carry=cLx14);
+    FullAdder(a=sJx14, b=cJx14, c=sKx14, sum=sLx14, carry=cLx15);
+    FullAdder(a=sJx15, b=cJx15, c=sKx15, sum=sLx15, carry=cLx16);
+    FullAdder(a=sJx16, b=cJx16, c=sKx16, sum=sLx16, carry=cLx17);
+    FullAdder(a=sJx17, b=cJx17, c=sKx17, sum=sLx17, carry=cLx18);
+    FullAdder(a=sJx18, b=cJx18, c=sKx18, sum=sLx18, carry=cLx19);
+    FullAdder(a=sJx19, b=cJx19, c=sKx19, sum=sLx19, carry=cLx20);
+    FullAdder(a=sJx20, b=cJx20, c=sKx20, sum=sLx20, carry=cLx21);
+    FullAdder(a=sJx21, b=cJx21, c=sKx21, sum=sLx21, carry=cLx22);
+    HalfAdder(a=sJx22, b=sKx22, sum=sLx22, carry=cLx23);
+    HalfAdder(a=sJx23, b=sKx23, sum=sLx23, carry=cLx24);
+    Or(a=sKx24, b=false, out=sLx24); Or(a=sKx25, b=false, out=sLx25);
+    Or(a=sKx26, b=false, out=sLx26); Or(a=sKx27, b=false, out=sLx27);
+    Or(a=sKx28, b=false, out=sLx28); Or(a=sKx29, b=false, out=sLx29);
+
+    // Grp M (cK:10..28, cE:14..29, sP:15..30)
+    Or(a=cKx10, b=false, out=sMx10); Or(a=cKx11, b=false, out=sMx11);
+    Or(a=cKx12, b=false, out=sMx12); Or(a=cKx13, b=false, out=sMx13);
+    HalfAdder(a=cKx14, b=cEx14, sum=sMx14, carry=cMx15);
+    FullAdder(a=cKx15, b=cEx15, c=sPx15, sum=sMx15, carry=cMx16);
+    FullAdder(a=cKx16, b=cEx16, c=sPx16, sum=sMx16, carry=cMx17);
+    FullAdder(a=cKx17, b=cEx17, c=sPx17, sum=sMx17, carry=cMx18);
+    FullAdder(a=cKx18, b=cEx18, c=sPx18, sum=sMx18, carry=cMx19);
+    FullAdder(a=cKx19, b=cEx19, c=sPx19, sum=sMx19, carry=cMx20);
+    FullAdder(a=cKx20, b=cEx20, c=sPx20, sum=sMx20, carry=cMx21);
+    FullAdder(a=cKx21, b=cEx21, c=sPx21, sum=sMx21, carry=cMx22);
+    FullAdder(a=cKx22, b=cEx22, c=sPx22, sum=sMx22, carry=cMx23);
+    FullAdder(a=cKx23, b=cEx23, c=sPx23, sum=sMx23, carry=cMx24);
+    FullAdder(a=cKx24, b=cEx24, c=sPx24, sum=sMx24, carry=cMx25);
+    FullAdder(a=cKx25, b=cEx25, c=sPx25, sum=sMx25, carry=cMx26);
+    FullAdder(a=cKx26, b=cEx26, c=sPx26, sum=sMx26, carry=cMx27);
+    FullAdder(a=cKx27, b=cEx27, c=sPx27, sum=sMx27, carry=cMx28);
+    FullAdder(a=cKx28, b=cEx28, c=sPx28, sum=sMx28, carry=cMx29);
+    HalfAdder(a=cEx29, b=sPx29, sum=sMx29, carry=cMx30);
+    Or(a=sPx30, b=false, out=sMx30);
+
+
+    
+    // Stage 5: 4 rows -> 3 rows
+    
+    // Grp N (sL:0..29, cL:5..24, sM:10..30)
+    Or(a=sLx0, b=false, out=sNx0); Or(a=sLx1, b=false, out=sNx1); Or(a=sLx2, b=false, out=sNx2);
+    Or(a=sLx3, b=false, out=sNx3); Or(a=sLx4, b=false, out=sNx4);
+    HalfAdder(a=sLx5, b=cLx5, sum=sNx5, carry=cNx6);
+    HalfAdder(a=sLx6, b=cLx6, sum=sNx6, carry=cNx7);
+    HalfAdder(a=sLx7, b=cLx7, sum=sNx7, carry=cNx8);
+    HalfAdder(a=sLx8, b=cLx8, sum=sNx8, carry=cNx9);
+    HalfAdder(a=sLx9, b=cLx9, sum=sNx9, carry=cNx10);
+    FullAdder(a=sLx10, b=cLx10, c=sMx10, sum=sNx10, carry=cNx11);
+    FullAdder(a=sLx11, b=cLx11, c=sMx11, sum=sNx11, carry=cNx12);
+    FullAdder(a=sLx12, b=cLx12, c=sMx12, sum=sNx12, carry=cNx13);
+    FullAdder(a=sLx13, b=cLx13, c=sMx13, sum=sNx13, carry=cNx14);
+    FullAdder(a=sLx14, b=cLx14, c=sMx14, sum=sNx14, carry=cNx15);
+    FullAdder(a=sLx15, b=cLx15, c=sMx15, sum=sNx15, carry=cNx16);
+    FullAdder(a=sLx16, b=cLx16, c=sMx16, sum=sNx16, carry=cNx17);
+    FullAdder(a=sLx17, b=cLx17, c=sMx17, sum=sNx17, carry=cNx18);
+    FullAdder(a=sLx18, b=cLx18, c=sMx18, sum=sNx18, carry=cNx19);
+    FullAdder(a=sLx19, b=cLx19, c=sMx19, sum=sNx19, carry=cNx20);
+    FullAdder(a=sLx20, b=cLx20, c=sMx20, sum=sNx20, carry=cNx21);
+    FullAdder(a=sLx21, b=cLx21, c=sMx21, sum=sNx21, carry=cNx22);
+    FullAdder(a=sLx22, b=cLx22, c=sMx22, sum=sNx22, carry=cNx23);
+    FullAdder(a=sLx23, b=cLx23, c=sMx23, sum=sNx23, carry=cNx24);
+    FullAdder(a=sLx24, b=cLx24, c=sMx24, sum=sNx24, carry=cNx25);
+    HalfAdder(a=sLx25, b=sMx25, sum=sNx25, carry=cNx26);
+    HalfAdder(a=sLx26, b=sMx26, sum=sNx26, carry=cNx27);
+    HalfAdder(a=sLx27, b=sMx27, sum=sNx27, carry=cNx28);
+    HalfAdder(a=sLx28, b=sMx28, sum=sNx28, carry=cNx29);
+    HalfAdder(a=sLx29, b=sMx29, sum=sNx29, carry=cNx30);
+    Or(a=sMx30, b=false, out=sNx30);
+
+
+    
+    // Stage 6: 3 rows -> 2 rows
+    
+    // Grp O (sN:0..30, cN:6..30, cM:15..30)
+    Or(a=sNx0, b=false, out=sOx0); Or(a=sNx1, b=false, out=sOx1); Or(a=sNx2, b=false, out=sOx2);
+    Or(a=sNx3, b=false, out=sOx3); Or(a=sNx4, b=false, out=sOx4); Or(a=sNx5, b=false, out=sOx5);
+    HalfAdder(a=sNx6, b=cNx6, sum=sOx6, carry=cOx7);
+    HalfAdder(a=sNx7, b=cNx7, sum=sOx7, carry=cOx8);
+    HalfAdder(a=sNx8, b=cNx8, sum=sOx8, carry=cOx9);
+    HalfAdder(a=sNx9, b=cNx9, sum=sOx9, carry=cOx10);
+    HalfAdder(a=sNx10, b=cNx10, sum=sOx10, carry=cOx11);
+    HalfAdder(a=sNx11, b=cNx11, sum=sOx11, carry=cOx12);
+    HalfAdder(a=sNx12, b=cNx12, sum=sOx12, carry=cOx13);
+    HalfAdder(a=sNx13, b=cNx13, sum=sOx13, carry=cOx14);
+    HalfAdder(a=sNx14, b=cNx14, sum=sOx14, carry=cOx15);
+    FullAdder(a=sNx15, b=cNx15, c=cMx15, sum=sOx15, carry=cOx16);
+    FullAdder(a=sNx16, b=cNx16, c=cMx16, sum=sOx16, carry=cOx17);
+    FullAdder(a=sNx17, b=cNx17, c=cMx17, sum=sOx17, carry=cOx18);
+    FullAdder(a=sNx18, b=cNx18, c=cMx18, sum=sOx18, carry=cOx19);
+    FullAdder(a=sNx19, b=cNx19, c=cMx19, sum=sOx19, carry=cOx20);
+    FullAdder(a=sNx20, b=cNx20, c=cMx20, sum=sOx20, carry=cOx21);
+    FullAdder(a=sNx21, b=cNx21, c=cMx21, sum=sOx21, carry=cOx22);
+    FullAdder(a=sNx22, b=cNx22, c=cMx22, sum=sOx22, carry=cOx23);
+    FullAdder(a=sNx23, b=cNx23, c=cMx23, sum=sOx23, carry=cOx24);
+    FullAdder(a=sNx24, b=cNx24, c=cMx24, sum=sOx24, carry=cOx25);
+    FullAdder(a=sNx25, b=cNx25, c=cMx25, sum=sOx25, carry=cOx26);
+    FullAdder(a=sNx26, b=cNx26, c=cMx26, sum=sOx26, carry=cOx27);
+    FullAdder(a=sNx27, b=cNx27, c=cMx27, sum=sOx27, carry=cOx28);
+    FullAdder(a=sNx28, b=cNx28, c=cMx28, sum=sOx28, carry=cOx29);
+    FullAdder(a=sNx29, b=cNx29, c=cMx29, sum=sOx29, carry=cOx30);
+    FullAdder(a=sNx30, b=cNx30, c=cMx30, sum=sOx30, carry=cOx31);
+
+
+
+    
+    // Final Addition: 4-bit CLA
+    // sO[0..30] + cO[7..31] -> c[0..31]
+    
+
+    // bits 0-6: only sO, no cO at these weights
+    Or(a=sOx0, b=false, out=c[0]);
+    Or(a=sOx1, b=false, out=c[1]);
+    Or(a=sOx2, b=false, out=c[2]);
+    Or(a=sOx3, b=false, out=c[3]);
+    Or(a=sOx4, b=false, out=c[4]);
+    Or(a=sOx5, b=false, out=c[5]);
+    Or(a=sOx6, b=false, out=c[6]);
+
+    // bit 7: first position where cO exists, no carry in
+    HalfAdder(a=sOx7, b=cOx7, sum=c[7], carry=cy8);
+
+    // bits 8-11 (carry in: cy8)
+    And(a=sOx8, b=cOx8, out=g8); Xor(a=sOx8, b=cOx8, out=p8);
+    And(a=sOx9, b=cOx9, out=g9); Xor(a=sOx9, b=cOx9, out=p9);
+    And(a=sOx10, b=cOx10, out=g10); Xor(a=sOx10, b=cOx10, out=p10);
+    And(a=sOx11, b=cOx11, out=g11); Xor(a=sOx11, b=cOx11, out=p11);
+    And(a=p8, b=cy8, out=t8a);
+    Or(a=g8, b=t8a, out=c9);
+    And(a=p9, b=g8, out=t8b); And(a=p9, b=p8, out=t8c); And(a=t8c, b=cy8, out=t8d);
+    Or(a=g9, b=t8b, out=t8e); Or(a=t8e, b=t8d, out=c10);
+    And(a=p10, b=g9, out=t8f); And(a=p10, b=p9, out=t8g);
+    And(a=t8g, b=g8, out=t8h); And(a=t8g, b=p8, out=t8i); And(a=t8i, b=cy8, out=t8j);
+    Or(a=g10, b=t8f, out=t8k); Or(a=t8k, b=t8h, out=t8l); Or(a=t8l, b=t8j, out=c11);
+    And(a=p11, b=g10, out=t8m); And(a=p11, b=p10, out=t8n);
+    And(a=t8n, b=g9, out=t8o); And(a=t8n, b=p9, out=t8p);
+    And(a=t8p, b=g8, out=t8q); And(a=t8p, b=p8, out=t8r); And(a=t8r, b=cy8, out=t8s);
+    Or(a=g11, b=t8m, out=t8u); Or(a=t8u, b=t8o, out=t8v); Or(a=t8v, b=t8q, out=t8w); Or(a=t8w, b=t8s, out=cy12);
+    Xor(a=p8, b=cy8, out=c[8]);
+    Xor(a=p9, b=c9, out=c[9]);
+    Xor(a=p10, b=c10, out=c[10]);
+    Xor(a=p11, b=c11, out=c[11]);
+
+    // bits 12-15 (carry in: cy12)
+    And(a=sOx12, b=cOx12, out=g12); Xor(a=sOx12, b=cOx12, out=p12);
+    And(a=sOx13, b=cOx13, out=g13); Xor(a=sOx13, b=cOx13, out=p13);
+    And(a=sOx14, b=cOx14, out=g14); Xor(a=sOx14, b=cOx14, out=p14);
+    And(a=sOx15, b=cOx15, out=g15); Xor(a=sOx15, b=cOx15, out=p15);
+    And(a=p12, b=cy12, out=t12a);
+    Or(a=g12, b=t12a, out=c13);
+    And(a=p13, b=g12, out=t12b); And(a=p13, b=p12, out=t12c); And(a=t12c, b=cy12, out=t12d);
+    Or(a=g13, b=t12b, out=t12e); Or(a=t12e, b=t12d, out=c14);
+    And(a=p14, b=g13, out=t12f); And(a=p14, b=p13, out=t12g);
+    And(a=t12g, b=g12, out=t12h); And(a=t12g, b=p12, out=t12i); And(a=t12i, b=cy12, out=t12j);
+    Or(a=g14, b=t12f, out=t12k); Or(a=t12k, b=t12h, out=t12l); Or(a=t12l, b=t12j, out=c15);
+    And(a=p15, b=g14, out=t12m); And(a=p15, b=p14, out=t12n);
+    And(a=t12n, b=g13, out=t12o); And(a=t12n, b=p13, out=t12p);
+    And(a=t12p, b=g12, out=t12q); And(a=t12p, b=p12, out=t12r); And(a=t12r, b=cy12, out=t12s);
+    Or(a=g15, b=t12m, out=t12u); Or(a=t12u, b=t12o, out=t12v); Or(a=t12v, b=t12q, out=t12w); Or(a=t12w, b=t12s, out=cy16);
+    Xor(a=p12, b=cy12, out=c[12]);
+    Xor(a=p13, b=c13, out=c[13]);
+    Xor(a=p14, b=c14, out=c[14]);
+    Xor(a=p15, b=c15, out=c[15]);
+
+    // bits 16-19 (carry in: cy16)
+    And(a=sOx16, b=cOx16, out=g16); Xor(a=sOx16, b=cOx16, out=p16);
+    And(a=sOx17, b=cOx17, out=g17); Xor(a=sOx17, b=cOx17, out=p17);
+    And(a=sOx18, b=cOx18, out=g18); Xor(a=sOx18, b=cOx18, out=p18);
+    And(a=sOx19, b=cOx19, out=g19); Xor(a=sOx19, b=cOx19, out=p19);
+    And(a=p16, b=cy16, out=t16a);
+    Or(a=g16, b=t16a, out=c17);
+    And(a=p17, b=g16, out=t16b); And(a=p17, b=p16, out=t16c); And(a=t16c, b=cy16, out=t16d);
+    Or(a=g17, b=t16b, out=t16e); Or(a=t16e, b=t16d, out=c18);
+    And(a=p18, b=g17, out=t16f); And(a=p18, b=p17, out=t16g);
+    And(a=t16g, b=g16, out=t16h); And(a=t16g, b=p16, out=t16i); And(a=t16i, b=cy16, out=t16j);
+    Or(a=g18, b=t16f, out=t16k); Or(a=t16k, b=t16h, out=t16l); Or(a=t16l, b=t16j, out=c19);
+    And(a=p19, b=g18, out=t16m); And(a=p19, b=p18, out=t16n);
+    And(a=t16n, b=g17, out=t16o); And(a=t16n, b=p17, out=t16p);
+    And(a=t16p, b=g16, out=t16q); And(a=t16p, b=p16, out=t16r); And(a=t16r, b=cy16, out=t16s);
+    Or(a=g19, b=t16m, out=t16u); Or(a=t16u, b=t16o, out=t16v); Or(a=t16v, b=t16q, out=t16w); Or(a=t16w, b=t16s, out=cy20);
+    Xor(a=p16, b=cy16, out=c[16]);
+    Xor(a=p17, b=c17, out=c[17]);
+    Xor(a=p18, b=c18, out=c[18]);
+    Xor(a=p19, b=c19, out=c[19]);
+
+    // bits 20-23 (carry in: cy20)
+    And(a=sOx20, b=cOx20, out=g20); Xor(a=sOx20, b=cOx20, out=p20);
+    And(a=sOx21, b=cOx21, out=g21); Xor(a=sOx21, b=cOx21, out=p21);
+    And(a=sOx22, b=cOx22, out=g22); Xor(a=sOx22, b=cOx22, out=p22);
+    And(a=sOx23, b=cOx23, out=g23); Xor(a=sOx23, b=cOx23, out=p23);
+    And(a=p20, b=cy20, out=t20a);
+    Or(a=g20, b=t20a, out=c21);
+    And(a=p21, b=g20, out=t20b); And(a=p21, b=p20, out=t20c); And(a=t20c, b=cy20, out=t20d);
+    Or(a=g21, b=t20b, out=t20e); Or(a=t20e, b=t20d, out=c22);
+    And(a=p22, b=g21, out=t20f); And(a=p22, b=p21, out=t20g);
+    And(a=t20g, b=g20, out=t20h); And(a=t20g, b=p20, out=t20i); And(a=t20i, b=cy20, out=t20j);
+    Or(a=g22, b=t20f, out=t20k); Or(a=t20k, b=t20h, out=t20l); Or(a=t20l, b=t20j, out=c23);
+    And(a=p23, b=g22, out=t20m); And(a=p23, b=p22, out=t20n);
+    And(a=t20n, b=g21, out=t20o); And(a=t20n, b=p21, out=t20p);
+    And(a=t20p, b=g20, out=t20q); And(a=t20p, b=p20, out=t20r); And(a=t20r, b=cy20, out=t20s);
+    Or(a=g23, b=t20m, out=t20u); Or(a=t20u, b=t20o, out=t20v); Or(a=t20v, b=t20q, out=t20w); Or(a=t20w, b=t20s, out=cy24);
+    Xor(a=p20, b=cy20, out=c[20]);
+    Xor(a=p21, b=c21, out=c[21]);
+    Xor(a=p22, b=c22, out=c[22]);
+    Xor(a=p23, b=c23, out=c[23]);
+
+    // bits 24-27 (carry in: cy24)
+    And(a=sOx24, b=cOx24, out=g24); Xor(a=sOx24, b=cOx24, out=p24);
+    And(a=sOx25, b=cOx25, out=g25); Xor(a=sOx25, b=cOx25, out=p25);
+    And(a=sOx26, b=cOx26, out=g26); Xor(a=sOx26, b=cOx26, out=p26);
+    And(a=sOx27, b=cOx27, out=g27); Xor(a=sOx27, b=cOx27, out=p27);
+    And(a=p24, b=cy24, out=t24a);
+    Or(a=g24, b=t24a, out=c25);
+    And(a=p25, b=g24, out=t24b); And(a=p25, b=p24, out=t24c); And(a=t24c, b=cy24, out=t24d);
+    Or(a=g25, b=t24b, out=t24e); Or(a=t24e, b=t24d, out=c26);
+    And(a=p26, b=g25, out=t24f); And(a=p26, b=p25, out=t24g);
+    And(a=t24g, b=g24, out=t24h); And(a=t24g, b=p24, out=t24i); And(a=t24i, b=cy24, out=t24j);
+    Or(a=g26, b=t24f, out=t24k); Or(a=t24k, b=t24h, out=t24l); Or(a=t24l, b=t24j, out=c27);
+    And(a=p27, b=g26, out=t24m); And(a=p27, b=p26, out=t24n);
+    And(a=t24n, b=g25, out=t24o); And(a=t24n, b=p25, out=t24p);
+    And(a=t24p, b=g24, out=t24q); And(a=t24p, b=p24, out=t24r); And(a=t24r, b=cy24, out=t24s);
+    Or(a=g27, b=t24m, out=t24u); Or(a=t24u, b=t24o, out=t24v); Or(a=t24v, b=t24q, out=t24w); Or(a=t24w, b=t24s, out=cy28);
+    Xor(a=p24, b=cy24, out=c[24]);
+    Xor(a=p25, b=c25, out=c[25]);
+    Xor(a=p26, b=c26, out=c[26]);
+    Xor(a=p27, b=c27, out=c[27]);
+
+    // bits 28-31 (bit 31: no sOx31, g31=0, p31=cOx31)
+    And(a=sOx28, b=cOx28, out=g28); Xor(a=sOx28, b=cOx28, out=p28);
+    And(a=sOx29, b=cOx29, out=g29); Xor(a=sOx29, b=cOx29, out=p29);
+    And(a=sOx30, b=cOx30, out=g30); Xor(a=sOx30, b=cOx30, out=p30);
+    And(a=p28, b=cy28, out=t28a);
+    Or(a=g28, b=t28a, out=c29);
+    And(a=p29, b=g28, out=t28b); And(a=p29, b=p28, out=t28c); And(a=t28c, b=cy28, out=t28d);
+    Or(a=g29, b=t28b, out=t28e); Or(a=t28e, b=t28d, out=c30);
+    And(a=p30, b=g29, out=t28f); And(a=p30, b=p29, out=t28g);
+    And(a=t28g, b=g28, out=t28h); And(a=t28g, b=p28, out=t28i); And(a=t28i, b=cy28, out=t28j);
+    Or(a=g30, b=t28f, out=t28k); Or(a=t28k, b=t28h, out=t28l); Or(a=t28l, b=t28j, out=c31);
+    Xor(a=p28, b=cy28, out=c[28]);
+    Xor(a=p29, b=c29, out=c[29]);
+    Xor(a=p30, b=c30, out=c[30]);
+    Xor(a=cOx31, b=c31, out=c[31]);
+}
