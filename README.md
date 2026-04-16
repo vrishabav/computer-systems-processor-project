@@ -1,6 +1,6 @@
 # Hack Computer System from Scratch
 
-This repository contains my advanced implementation of a 16-bit computer architecture constructed entirely from logic gates, specifically developed for the **DA2304 Computer Systems** coursework. Rather than relying on simple abstraction, the hardware modules were built sequentially from foundational logic components. The project is separated into hardware and software milestones, closely mapping the concepts taught in the *Nand to Tetris* curriculum but extending the requirements to feature a highly optimized architecture.
+This repository contains my implementation of a 16-bit computer architecture constructed entirely from logic gates, specifically developed for the **DA2304 Computer Systems** coursework. The hardware modules were built sequentially from foundational logic components. The project is separated into hardware and software steps, closely mapping the concepts taught in the *Nand to Tetris* curriculum but extending the requirements.
 
 ## Overview of Projects
 
